@@ -10,15 +10,23 @@ let package = Package(
         .macOS(.v14),
     ],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
+        // Original Privy SDK (binary)
         .library(
             name: "Privy",
             targets: ["PrivySDK"]),
+        // Aptos extension for Privy embedded wallets
+        .library(
+            name: "PrivyAptos",
+            targets: ["PrivyAptos"]),
     ],
     dependencies: [],
     targets: [
         .binaryTarget(
             name: "PrivySDK",
             path: "PrivySDK.xcframework"),
+        .target(
+            name: "PrivyAptos",
+            dependencies: ["PrivySDK"],
+            path: "Sources/PrivyAptos"),
     ]
 )
